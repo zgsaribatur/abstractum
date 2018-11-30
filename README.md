@@ -1,2 +1,2 @@
-# abstractum
-Abstraction for ASP programs
+# AbstrASP
+Tools for applying abstraction on ASP programs

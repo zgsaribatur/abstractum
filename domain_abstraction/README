@@ -1,0 +1,30 @@
+The folder contains two scripts:
+    - program_dom_abstraction.py : constructs an abstract program given the original program, the abstraction mapping and the predicate name that the abstraction is applied on.
+        called with
+            python program_dom_abstraction.py ex/test_ex_www.lp ex/mapping_test_ex_1.lp dom
+    - mapping_search.py: searches over possible refinements of an abstraction mapping given the original program, the abstraction mapping, the predicate name, and the refinement type.
+        refinement types: 1 : splits the mapping in two by keeping the order 
+                          2 : considers combination of splits
+        called with
+            python mapping_search.py ex/test_ex_www.lp ex/mapping_test_ex_1.lp dom 1
+            
+Notes about program_dom_abstraction.py (improvements are in progress):
+
+- Currently, the constructed program has ground rules depending on the type of the relation.
+    - E.g., {e(X)} :- c(X), a(Y), X<=Y, dom(X), dom(Y), X=a0, Y=a0. %leq,a0,a0,III
+            {e(X)} :- c(X), a(Y), X<=Y, dom(X), dom(Y), X=a1, Y=a1. %leq,a1,a1,III
+            instead of
+            {e(X)} :- c(X), a(Y), X<=Y, dom(X), dom(Y), reltype(X,Y,iii).
+
+- The input program should not omit domain atoms from the rules.
+    - The script traces each rule and only looks at the elements that from the domain predicate on which the abstraction is applied on.
+    - E.g., b(X,Y) :- a(X),d(Y). should be in form b(X,Y) :- a(X),d(Y), dom(X), dom(Y).
+    
+- The script supports at most two relations at a rule.
+    - Currently, the two relations need to be in combined form.
+    - E.g., X1=X2, X2<5 -> equLess(X1,X2,5)
+            X1=X2, Y1=Y2 -> equEqu(X1,X2,Y1,Y2)
+    - The folder reltype_computation contains the .lp programs that computes the types of the relations for a given mapping
+    - The supported formats are: equEqu (3 arg), equEqu (4 arg), leqEqu (4 arg), leqLeq (4 arg), 
+                                leqLess (3 arg), lessLess (3 arg), neqEqu (3 arg), neqEqu (4 arg), neqNeq (3 arg)
+    - In case of need for new formats, one need to create the respective .lp program.

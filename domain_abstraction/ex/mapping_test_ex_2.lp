@@ -1,0 +1,7 @@
+%mapping {1} -> a0, {2,3} -> a1 , {4,5} -> a2
+dom(dom,1..5).
+mapTo(dom,1,a0).
+mapTo(dom,2,a1).
+mapTo(dom,3,a1).
+mapTo(dom,4,a2).
+mapTo(dom,5,a2).

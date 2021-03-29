@@ -3,8 +3,8 @@ The folder contains two scripts:
         called with
             python program_dom_abstraction.py ex/test_ex_www.lp ex/mapping_test_ex_1.lp dom
     - mapping_search.py: searches over possible refinements of an abstraction mapping given the original program, the abstraction mapping, the predicate name, and the refinement type.
-        refinement types: 1 : splits the mapping in two by keeping the order 
-                          2 : considers combination of splits
+        refinement types: 0 : splits the mapping in two by keeping the order 
+                          1 : considers combination of splits
         called with
             python mapping_search.py ex/test_ex_www.lp ex/mapping_test_ex_1.lp dom 1
             
